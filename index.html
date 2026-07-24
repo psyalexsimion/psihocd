@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PsihOCD — Psihoeducație și sprijin psihologic pentru OCD</title>
+<meta name="description" content="PsihOCD — resurse psihoeducaționale, servicii de evaluare și psihoterapie pentru persoane care se confruntă cu tulburarea obsesiv-compulsivă (OCD).">
+<style>
+  :root{
+    --ink:#14181a;
+    --ink-soft:#3c464b;
+    --slate:#607682;
+    --slate-deep:#3f4f57;
+    --slate-pale:#eef1f2;
+    --slate-line:#c7d1d5;
+    --white:#ffffff;
+    --focus:#1c2a2f;
+    --radius:14px;
+    --maxw:1120px;
+    --serif: "Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+    --sans: "Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+    --mono: "IBM Plex Mono","Courier New",monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{max-width:100%; display:block;}
+
+  a{color:var(--slate-deep);}
+  a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--ink); color:#fff; padding:.8rem 1.2rem; z-index:1000;
+    border-radius:0 0 8px 0;
+  }
+  .skip-link:focus{ left:0; top:0; }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 1.5rem;}
+
+  /* ===== Header ===== */
+  header.site{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,0.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--slate-line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.85rem 0;
+    gap:1rem;
+  }
+  .brand{
+    display:flex; align-items:center; gap:.6rem;
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:1.4rem;
+    color:var(--ink);
+    text-decoration:none;
+    letter-spacing:.01em;
+  }
+  .brand .mark{
+    width:34px; height:34px; flex:none;
+  }
+  nav.primary{
+    display:flex; align-items:center; gap:1.6rem;
+    flex-wrap:wrap;
+  }
+  nav.primary a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:.96rem;
+    font-weight:600;
+    padding:.4rem .1rem;
+    border-bottom:2px solid transparent;
+    transition:border-color .15s ease, color .15s ease;
+    white-space:nowrap;
+  }
+  nav.primary a:hover{ color:var(--slate-deep); border-bottom-color:var(--slate); }
+
+  .res-dropdown{ position:relative; }
+  .res-dropdown > a{ display:inline-flex; align-items:center; gap:.3rem; }
+  .res-dropdown .chev{ font-size:.7rem; transition:transform .15s ease; }
+  .res-dropdown:hover .chev, .res-dropdown:focus-within .chev{ transform:rotate(180deg); }
+  .res-panel{
+    position:absolute; top:calc(100% + .9rem); left:50%; transform:translateX(-50%);
+    background:var(--white);
+    border:1px solid var(--slate-line);
+    border-radius:var(--radius);
+    box-shadow:0 18px 40px -18px rgba(20,24,26,.28);
+    padding:1rem;
+    min-width:280px;
+    display:none;
+    z-index:50;
+  }
+  .res-dropdown:hover .res-panel,
+  .res-dropdown:focus-within .res-panel{ display:block; }
+  .res-panel a{
+    display:block;
+    padding:.45rem .5rem;
+    border-radius:8px;
+    font-size:.9rem;
+    border-bottom:none;
+  }
+  .res-panel a:hover{ background:var(--slate-pale); }
+
+  .nav-toggle{ display:none; }
+
+  @media (max-width: 880px){
+    nav.primary{
+      display:none;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--white);
+      border-bottom:1px solid var(--slate-line);
+      flex-direction:column; align-items:flex-start;
+      padding:1rem 1.5rem 1.5rem;
+      gap:.9rem;
+    }
+    nav.primary.open{ display:flex; }
+    .res-panel{ position:static; transform:none; box-shadow:none; border:none; padding:.3rem 0 0 .6rem; min-width:0; display:none;}
+    .res-dropdown.open .res-panel{ display:block; }
+    .nav-toggle{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:42px; height:42px;
+      background:var(--slate-pale);
+      border:1px solid var(--slate-line);
+      border-radius:10px;
+      cursor:pointer;
+      font-size:1.1rem;
+    }
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding:4.5rem 0 4rem;
+    background:
+      radial-gradient(120% 100% at 100% 0%, #f1f4f5 0%, transparent 55%),
+      var(--white);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:3rem;
+    align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; gap:2.5rem; } }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.5rem;
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--slate-deep);
+    background:var(--slate-pale);
+    border:1px solid var(--slate-line);
+    padding:.35rem .7rem;
+    border-radius:999px;
+    margin-bottom:1.2rem;
+  }
+  h1{
+    font-family:var(--serif);
+    font-size:clamp(2.3rem, 4.6vw, 3.4rem);
+    line-height:1.08;
+    margin:0 0 1.1rem;
+    color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  h1 em{ font-style:normal; color:var(--slate-deep); }
+  .lede{
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin:0 0 1.8rem;
+  }
+  .cta-row{ display:flex; gap:.9rem; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    padding:.85rem 1.4rem;
+    border-radius:10px;
+    font-weight:700;
+    font-size:.98rem;
+    text-decoration:none;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease, background .15s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{ background:var(--slate-deep); color:#fff; }
+  .btn-primary:hover{ background:var(--ink); }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--slate-line); }
+  .btn-ghost:hover{ border-color:var(--slate-deep); }
+
+  /* signature loop mark */
+  .loop-signature{
+    width:100%;
+    aspect-ratio:1/1;
+    max-width:400px;
+    margin:0 auto;
+  }
+
+  /* ===== Section shell ===== */
+  section{ padding:4.5rem 0; border-top:1px solid var(--slate-line); }
+  section.flush{ border-top:none; }
+  .section-head{ max-width:64ch; margin-bottom:2.6rem; }
+  .kicker{
+    font-family:var(--mono);
+    font-size:.78rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--slate-deep);
+    display:block;
+    margin-bottom:.6rem;
+  }
+  h2{
+    font-family:var(--serif);
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+    margin:0 0 .7rem;
+    color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .section-sub{ color:var(--ink-soft); font-size:1.05rem; }
+
+  /* ===== Acasă summary cards ===== */
+  .summary-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1.3rem;
+    margin-top:2.6rem;
+  }
+  @media (max-width:800px){ .summary-grid{ grid-template-columns:1fr; } }
+  .summary-card{
+    border:1px solid var(--slate-line);
+    border-radius:var(--radius);
+    padding:1.6rem;
+    background:var(--white);
+  }
+  .summary-card .num{
+    font-family:var(--mono); color:var(--slate); font-size:.85rem; letter-spacing:.06em;
+  }
+  .summary-card h3{ font-family:var(--serif); font-size:1.2rem; margin:.5rem 0 .5rem; color:var(--ink);}
+  .summary-card p{ margin:0; color:var(--ink-soft); font-size:.96rem; }
+
+  /* ===== Resurse ===== */
+  .res-cat{ margin-bottom:2.4rem; }
+  .res-cat:last-child{ margin-bottom:0; }
+  .res-cat h3{
+    font-family:var(--serif); font-size:1.25rem; margin:0 0 1rem; color:var(--ink);
+    display:flex; align-items:center; gap:.6rem;
+  }
+  .res-cat h3 .ico{
+    width:30px; height:30px; flex:none;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:var(--slate-pale); border-radius:8px; font-size:1rem;
+  }
+  .link-list{ list-style:none; margin:0; padding:0; display:grid; gap:.7rem; }
+  .link-list li{
+    border:1px solid var(--slate-line);
+    border-radius:10px;
+    padding:.9rem 1.1rem;
+    background:var(--white);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .link-list li:hover{ border-color:var(--slate); background:var(--slate-pale); }
+  .link-list a{
+    text-decoration:none;
+    color:var(--ink);
+    font-weight:600;
+    font-size:.98rem;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  }
+  .link-list a span.arrow{ color:var(--slate-deep); font-family:var(--mono); flex:none; }
+  .link-list .src{ display:block; font-size:.82rem; color:var(--ink-soft); font-weight:400; margin-top:.15rem; }
+
+  /* ===== Despre noi ===== */
+  .team-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2.6rem; }
+  @media (max-width:820px){ .team-grid{ grid-template-columns:1fr; } }
+  .person{
+    border:1px solid var(--slate-line);
+    border-radius:var(--radius);
+    padding:1.8rem;
+    background:var(--white);
+  }
+  .person .role{
+    font-family:var(--mono); font-size:.78rem; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--slate-deep);
+  }
+  .person h3{ font-family:var(--serif); font-size:1.5rem; margin:.3rem 0 .2rem; color:var(--ink);}
+  .person .title{ color:var(--ink-soft); font-weight:600; margin-bottom:1rem; font-size:.95rem;}
+  .person p{ color:var(--ink-soft); font-size:.96rem; }
+  .person .meta-row{
+    display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; margin-top:1.2rem;
+    padding-top:1.1rem; border-top:1px dashed var(--slate-line);
+  }
+  .badge{
+    font-family:var(--mono); font-size:.78rem; color:var(--slate-deep);
+    background:var(--slate-pale); border:1px solid var(--slate-line); padding:.3rem .6rem; border-radius:999px;
+  }
+  .icon-link{
+    display:inline-flex; align-items:center; gap:.4rem;
+    text-decoration:none; font-weight:600; font-size:.9rem; color:var(--ink);
+    border:1px solid var(--slate-line); padding:.4rem .8rem; border-radius:8px;
+  }
+  .icon-link:hover{ border-color:var(--slate-deep); background:var(--slate-pale); }
+
+  /* ===== Tarife ===== */
+  .price-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.6rem; margin-top:2.6rem; }
+  @media (max-width:760px){ .price-grid{ grid-template-columns:1fr; } }
+  .price-card{
+    border:1px solid var(--slate-line);
+    border-radius:var(--radius);
+    padding:1.9rem;
+    background:var(--white);
+  }
+  .price-card h3{ font-family:var(--serif); font-size:1.3rem; margin:0 0 1.1rem; color:var(--ink);}
+  .price-line{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:.85rem 0; border-top:1px solid var(--slate-line);
+  }
+  .price-line:first-of-type{ border-top:none; }
+  .price-line .lbl{ color:var(--ink-soft); font-size:.98rem; }
+  .price-line .val{ font-family:var(--serif); font-size:1.35rem; color:var(--slate-deep); font-weight:700; }
+  .price-note{ font-size:.85rem; color:var(--ink-soft); margin-top:1rem; }
+
+  /* ===== Articole ===== */
+  .art-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:2.6rem;
+  }
+  @media (max-width:900px){ .art-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:620px){ .art-grid{ grid-template-columns:1fr; } }
+  .art-card{
+    border:1px solid var(--slate-line);
+    border-radius:var(--radius);
+    padding:1.4rem;
+    background:var(--white);
+    transition:box-shadow .15s ease, border-color .15s ease;
+  }
+  .art-card:hover{ box-shadow:0 14px 30px -18px rgba(20,24,26,.3); border-color:var(--slate); }
+  .art-card .emoji{ font-size:1.5rem; }
+  .art-card h3{ font-family:var(--serif); font-size:1.08rem; margin:.7rem 0 .4rem; color:var(--ink); }
+  .art-card p{ font-size:.9rem; color:var(--ink-soft); margin:0; }
+  .art-tag{
+    display:inline-block; margin-top:.8rem; font-family:var(--mono); font-size:.72rem;
+    color:var(--slate-deep); letter-spacing:.04em; text-transform:uppercase;
+  }
+
+  /* ===== Evenimente ===== */
+  .table-wrap{ overflow-x:auto; margin-top:1.6rem; border:1px solid var(--slate-line); border-radius:var(--radius); }
+  table.events{ width:100%; border-collapse:collapse; font-size:.94rem; }
+  table.events caption{
+    text-align:left; font-family:var(--mono); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--slate-deep); padding:.9rem 1.1rem 0;
+  }
+  table.events th, table.events td{ text-align:left; padding:.9rem 1.1rem; border-top:1px solid var(--slate-line); }
+  table.events thead th{ background:var(--slate-pale); border-top:none; font-size:.82rem; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft);}
+  table.events a.reg{
+    display:inline-block; font-weight:700; text-decoration:none; color:var(--slate-deep);
+    border:1px solid var(--slate-line); padding:.35rem .7rem; border-radius:8px; font-size:.86rem;
+  }
+  table.events a.reg:hover{ background:var(--slate-pale); }
+  .events-block{ margin-bottom:2.2rem; }
+  .events-block:last-child{ margin-bottom:0; }
+  .status-done{ color:var(--slate-deep); font-weight:600; font-size:.88rem; }
+
+  /* ===== Studii ===== */
+  .study-list{ display:grid; gap:1.2rem; margin-top:2.6rem; }
+  .study-card{
+    border:1px solid var(--slate-line); border-radius:var(--radius); padding:1.7rem;
+    display:grid; grid-template-columns:auto 1fr; gap:1.3rem; align-items:flex-start;
+  }
+  .study-card.featured{ background:var(--slate-pale); border-color:var(--slate); }
+  @media (max-width:640px){ .study-card{ grid-template-columns:1fr; } }
+  .study-num{
+    font-family:var(--mono); font-size:.85rem; color:var(--slate-deep);
+    background:var(--white); border:1px solid var(--slate-line); border-radius:8px;
+    padding:.3rem .6rem; width:fit-content;
+  }
+  .study-card h3{ font-family:var(--serif); font-size:1.25rem; margin:0 0 .5rem; color:var(--ink); }
+  .study-card p{ margin:0; color:var(--ink-soft); font-size:.95rem; }
+  .study-status{
+    display:inline-block; margin-top:.9rem; font-family:var(--mono); font-size:.75rem;
+    text-transform:uppercase; letter-spacing:.05em; color:var(--slate-deep);
+  }
+
+  /* ===== Contact ===== */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2.6rem; }
+  @media (max-width:700px){ .contact-grid{ grid-template-columns:1fr; } }
+  .contact-btn{
+    display:flex; flex-direction:column; align-items:flex-start; gap:.7rem;
+    text-decoration:none;
+    padding:2.1rem 1.8rem;
+    border-radius:var(--radius);
+    border:1.5px solid var(--slate-line);
+    background:var(--white);
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .contact-btn:hover{ transform:translateY(-3px); box-shadow:0 20px 40px -20px rgba(20,24,26,.3); border-color:var(--slate-deep); }
+  .contact-btn .wa-ico{
+    width:44px; height:44px; border-radius:50%;
+    background:var(--slate-deep); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:1.35rem;
+  }
+  .contact-btn .c-label{ font-family:var(--mono); font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:var(--slate-deep); }
+  .contact-btn .c-title{ font-family:var(--serif); font-size:1.4rem; color:var(--ink); }
+  .contact-btn .c-num{ color:var(--ink-soft); font-size:1rem; }
+
+  /* ===== Footer ===== */
+  footer.site{
+    background:var(--ink);
+    color:#dbe2e4;
+    padding:3rem 0 2rem;
+    margin-top:2rem;
+  }
+  footer.site .foot-grid{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:2rem;
+    padding-bottom:2rem; border-bottom:1px solid #33393b;
+  }
+  footer.site .brand-line{ font-family:var(--serif); font-size:1.3rem; color:#fff; }
+  footer.site p{ color:#aab4b7; max-width:40ch; font-size:.92rem;}
+  footer.site .foot-links{ display:flex; gap:1.4rem; flex-wrap:wrap; }
+  footer.site a{ color:#dbe2e4; text-decoration:none; font-size:.9rem; }
+  footer.site a:hover{ color:#fff; text-decoration:underline; }
+  .foot-bottom{ padding-top:1.4rem; font-size:.82rem; color:#8c9598; display:flex; justify-content:space-between; flex-wrap:wrap; gap:.6rem;}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+    clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Sari la conținut</a>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="#acasa" class="brand">
+      <svg class="mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="22" cy="22" r="20" stroke="#607682" stroke-width="2.5"/>
+        <path d="M22 8 A14 14 0 1 1 8.6 27" stroke="#14181a" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M17 22 L20.5 25.5 L28 17" stroke="#3f4f57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      PsihOCD
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+      <span aria-hidden="true">☰</span><span class="visually-hidden">Meniu</span>
+    </button>
+    <nav class="primary" id="primaryNav" aria-label="Navigare principală">
+      <a href="#acasa">Acasă</a>
+      <div class="res-dropdown" id="resDropdown">
+        <a href="#resurse" aria-haspopup="true" id="resToggle">Resurse <span class="chev" aria-hidden="true">▾</span></a>
+        <div class="res-panel" aria-label="Submeniu resurse">
+          <a href="#resurse-video">📺 Canal YouTube</a>
+          <a href="#resurse-insta">📷 Pagini Instagram</a>
+          <a href="#resurse-progres">📈 Urmărirea progresului</a>
+          <a href="#resurse-atitudine">🧭 Atitudinea potrivită</a>
+        </div>
+      </div>
+      <a href="#despre">Despre noi</a>
+      <a href="#articole">Articole</a>
+      <a href="#studii">Studii</a>
+      <a href="#tarife">Tarife</a>
+      <a href="#evenimente">Evenimente</a>
+      <a href="#contact">Contact 🌀</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- ===================== ACASĂ ===================== -->
+  <section id="acasa" class="hero flush">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Psihoeducație și sprijin pentru OCD</span>
+        <h1>Când mintea se blochează în <em>bucle</em>, găsim împreună calea de ieșire.</h1>
+        <p class="lede">PsihOCD este spațiul dedicat înțelegerii tulburării obsesiv-compulsive (OCD): de la gânduri intruzive și ritualuri de verificare, până la evaluare clinică și psihoterapie orientată spre expunere și prevenirea răspunsului (ERP). Aici găsești resurse verificate, servicii clare și un loc din care poți începe.</p>
+        <div class="cta-row">
+          <a href="#contact" class="btn btn-primary">Programează o discuție</a>
+          <a href="#resurse" class="btn btn-ghost">Explorează resursele</a>
+        </div>
+      </div>
+      <div>
+        <svg class="loop-signature" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrație a unei bucle care se deschide către o linie dreaptă, simbolizând desprinderea din tiparele OCD">
+          <circle cx="200" cy="200" r="150" fill="#eef1f2"/>
+          <path d="M200 90 A110 110 0 1 1 92 220" stroke="#607682" stroke-width="10" stroke-linecap="round"/>
+          <path d="M92 220 C 130 300, 250 320, 320 260" stroke="#14181a" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 22"/>
+          <circle cx="200" cy="90" r="9" fill="#3f4f57"/>
+          <circle cx="320" cy="260" r="9" fill="#14181a"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span class="num">01 — Înțelegere</span>
+          <h3>Psihoeducație de încredere</h3>
+          <p>Am strâns canale YouTube și Instagram specializate, alături de exemple video concrete despre urmărirea progresului și atitudinea potrivită față de simptome — ca punct de plecare informat, nu ca substitut al terapiei.</p>
+        </div>
+        <div class="summary-card">
+          <span class="num">02 — Evaluare</span>
+          <h3>Clarificare clinică</h3>
+          <p>Oferim o evaluare care ajută la distincția dintre OCD și alte provocări psihologice asemănătoare — un pas esențial înainte de a alege direcția potrivită de intervenție.</p>
+        </div>
+        <div class="summary-card">
+          <span class="num">03 — Intervenție</span>
+          <h3>Psihoterapie adaptată</h3>
+          <p>Ședințe individuale, online sau fizic în București, construite pe o abordare empatică și personalizată, cu accent pe mentalitate și psihoeducație continuă.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESURSE ===================== -->
+  <section id="resurse">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Bibliotecă</span>
+        <h2>Resurse psihoeducaționale OCD</h2>
+        <p class="section-sub">Materiale externe, selectate ca punct de plecare pentru înțelegerea OCD. Nu înlocuiesc evaluarea sau terapia individuală.</p>
+      </div>
+
+      <div class="res-cat" id="resurse-video">
+        <h3><span class="ico">📺</span> Canal YouTube</h3>
+        <ul class="link-list">
+          <li>
+            <a href="https://youtube.com/@ocdhelp?si=xgONVQd8uC3Zkgye" target="_blank" rel="noopener noreferrer">
+              <span>OCDhelp — canal psihoeducațional despre OCD<span class="src">youtube.com/@ocdhelp</span></span>
+              <span class="arrow">↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="res-cat" id="resurse-insta">
+        <h3><span class="ico">📷</span> Pagini de Instagram</h3>
+        <ul class="link-list">
+          <li>
+            <a href="https://www.instagram.com/ocddolphin?igsh=MWwxbmJxY3Q4d3Bpbw==" target="_blank" rel="noopener noreferrer">
+              <span>@ocddolphin<span class="src">instagram.com/ocddolphin</span></span>
+              <span class="arrow">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/navigating.ocd?igsh=c2pleXdhMG1hZXF6" target="_blank" rel="noopener noreferrer">
+              <span>@navigating.ocd<span class="src">instagram.com/navigating.ocd</span></span>
+              <span class="arrow">↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="res-cat" id="resurse-progres">
+        <h3><span class="ico">📈</span> Exemplu — tehnica urmăririi progresului</h3>
+        <ul class="link-list">
+          <li>
+            <a href="https://youtu.be/DBMg4NWanfk?si=i7A5iA3TvjOI4LOl" target="_blank" rel="noopener noreferrer">
+              <span>Cum urmărești evoluția simptomelor OCD în timp<span class="src">youtu.be/DBMg4NWanfk</span></span>
+              <span class="arrow">↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="res-cat" id="resurse-atitudine">
+        <h3><span class="ico">🧭</span> Atitudinea potrivită atunci când simptomele OCD deranjează</h3>
+        <ul class="link-list">
+          <li>
+            <a href="https://youtu.be/XzEEAm9l_aA?si=5edH5eronH6-eOAz" target="_blank" rel="noopener noreferrer">
+              <span>Resursă video 1<span class="src">youtu.be/XzEEAm9l_aA</span></span>
+              <span class="arrow">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://youtu.be/y3vEi23ZLpI?si=zZA6zGk-n4bMiRnr" target="_blank" rel="noopener noreferrer">
+              <span>Resursă video 2<span class="src">youtu.be/y3vEi23ZLpI</span></span>
+              <span class="arrow">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://youtu.be/i94d_wA_gFU?si=aI4e9IUq5AA391xA" target="_blank" rel="noopener noreferrer">
+              <span>Resursă video 3<span class="src">youtu.be/i94d_wA_gFU</span></span>
+              <span class="arrow">↗</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DESPRE NOI ===================== -->
+  <section id="despre">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Echipă</span>
+        <h2>👥 Despre noi</h2>
+        <p class="section-sub">Echipa PsihOCD — dedicată psihoeducației și sprijinului pentru persoanele care se confruntă cu OCD.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="person">
+          <span class="role">Psiholog clinician în supervizare</span>
+          <h3>Diana Tonescu</h3>
+          <div class="title">Cod RUP 37376</div>
+          <p>Psiholog clinician în supervizare, ofer servicii de evaluare și consiliere adaptată provocărilor specifice persoanelor ce se confruntă cu OCD. Serviciile mele sunt potrivite pentru cei ce caută să înțeleagă dacă provocarea cu care se confruntă este OCD sau dacă este vorba despre altceva. Indiferent de caz, ofer ghidarea necesară în urma procesului de evaluare.</p>
+          <p>Confruntându-mă personal cu OCD pe parcursul vieții, ofer o abordare personalizată, empatică și adaptată nevoilor fiecărui client. Consider că mentalitatea și psihoeducația sunt vitale în procesul gestionării simptomelor de OCD.</p>
+          <div class="meta-row">
+            <span class="badge">Cod RUP 37376</span>
+            <a class="icon-link" href="https://www.facebook.com/share/1PsDcNcKdj/" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+            <a class="icon-link" href="https://www.linkedin.com/in/diana-tonescu/" target="_blank" rel="noopener noreferrer">📄 Vezi CV ↗</a>
+          </div>
+        </div>
+
+        <div class="person">
+          <span class="role">Inginer IT · Formator · Psiholog clinician</span>
+          <h3>Alex Simion</h3>
+          <div class="title">Psihoterapeut și psiho-oncolog (în formare)</div>
+          <p>Aduc în cadrul PsihOCD o abordare structurată și orientată spre soluții: dezvoltarea resurselor psihoeducaționale, organizarea materialelor despre OCD și susținerea unui cadru clar în care informația clinică ajunge la oameni într-o formă accesibilă și corectă.</p>
+          <p>Specializări: gestionarea anxietății și a stresului, psihologia traumei, psihoterapie individuală, dezvoltare personală și reziliență.</p>
+          <div class="meta-row">
+            <a class="icon-link" href="https://www.psyalexsimion.com/despre-mine-formare" target="_blank" rel="noopener noreferrer">📄 Vezi CV ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ARTICOLE ===================== -->
+  <section id="articole">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Bibliotecă proprie</span>
+        <h2>Articole despre OCD</h2>
+        <p class="section-sub">Teme principale pe care le vom dezvolta ca articole psihoeducaționale.</p>
+      </div>
+      <div class="art-grid">
+        <article class="art-card">
+          <span class="emoji">🌀</span>
+          <h3>Ce este OCD, de fapt?</h3>
+          <p>Diferența dintre obsesii, compulsii și „obiceiuri" — o introducere clară în tulburarea obsesiv-compulsivă.</p>
+          <span class="art-tag">Bazele OCD</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">💭</span>
+          <h3>Gânduri intruzive: normale sau alarmante?</h3>
+          <p>De ce apar gândurile intruzive, cum se deosebesc de intenții reale și ce rol au în ciclul OCD.</p>
+          <span class="art-tag">Simptome</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">🔁</span>
+          <h3>Ritualuri de verificare și de ordonare</h3>
+          <p>Cum se formează compulsiile, de ce oferă alinare temporară și de ce mențin, de fapt, anxietatea.</p>
+          <span class="art-tag">Compulsii</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">🎯</span>
+          <h3>OCD vs. perfecționism</h3>
+          <p>Unde se termină trăsătura de personalitate și unde începe tiparul clinic care merită evaluat.</p>
+          <span class="art-tag">Diagnostic diferențial</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">🧪</span>
+          <h3>ERP — Expunere și Prevenirea Răspunsului</h3>
+          <p>Cum funcționează terapia considerată standard de aur pentru OCD și ce presupune, practic, un exercițiu de expunere.</p>
+          <span class="art-tag">Terapie</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">🧫</span>
+          <h3>OCD de contaminare</h3>
+          <p>De la frica de germeni la ritualuri de spălare — mecanismele din spatele acestui subtip frecvent.</p>
+          <span class="art-tag">Subtipuri OCD</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">🧒</span>
+          <h3>OCD la copii și adolescenți</h3>
+          <p>Semnale timpurii, impactul asupra școlii și familiei, și de ce evaluarea precoce contează.</p>
+          <span class="art-tag">Vârste specifice</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">🌗</span>
+          <h3>Anxietate, depresie și OCD</h3>
+          <p>De ce apar frecvent împreună și cum se schimbă abordarea terapeutică atunci când există comorbidități.</p>
+          <span class="art-tag">Comorbiditate</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">🏡</span>
+          <h3>Rolul familiei în gestionarea OCD</h3>
+          <p>Ce înseamnă „acomodarea familială", de ce poate întreține simptomele și cum pot ajuta cei apropiați, corect.</p>
+          <span class="art-tag">Context familial</span>
+        </article>
+        <article class="art-card">
+          <span class="emoji">💻</span>
+          <h3>Terapie online pentru OCD — funcționează?</h3>
+          <p>Ce spune cercetarea despre eficiența ședințelor online de ERP și pentru cine e potrivit acest format.</p>
+          <span class="art-tag">Acces la terapie</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STUDII ===================== -->
+  <section id="studii">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Cercetare</span>
+        <h2>📚 Studii propuse</h2>
+        <p class="section-sub">Direcții de cercetare pe care intenționăm să le dezvoltăm în jurul OCD.</p>
+      </div>
+      <div class="study-list">
+        <div class="study-card featured">
+          <span class="study-num">01</span>
+          <div>
+            <h3>OCD SubClinic — simptome sub pragul diagnostic</h3>
+            <p>Studiu propus despre persoanele care prezintă trăsături obsesiv-compulsive fără a îndeplini criteriile complete de diagnostic: cât de frecvente sunt, cum influențează funcționarea zilnică și în ce măsură pot evolua spre o formă clinică fără intervenție timpurie.</p>
+            <span class="study-status">Propunere de cercetare</span>
+          </div>
+        </div>
+        <div class="study-card">
+          <span class="study-num">02</span>
+          <div>
+            <h3>Eficiența ERP livrată online vs. fizic</h3>
+            <p>Comparație propusă între rezultatele terapiei prin expunere și prevenirea răspunsului desfășurate online și cele desfășurate față în față, la persoane adulte din România.</p>
+            <span class="study-status">Disponibil în curând</span>
+          </div>
+        </div>
+        <div class="study-card">
+          <span class="study-num">03</span>
+          <div>
+            <h3>Acomodarea familială și impactul asupra severității OCD</h3>
+            <p>Studiu propus privind modul în care implicarea membrilor familiei în ritualurile persoanei cu OCD influențează evoluția simptomelor pe termen mediu.</p>
+            <span class="study-status">Disponibil în curând</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TARIFE ===================== -->
+  <section id="tarife">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Servicii</span>
+        <h2>📋 Tarife</h2>
+        <p class="section-sub">Prețuri clare pentru evaluare clinică și psihoterapie.</p>
+      </div>
+      <div class="price-grid">
+        <div class="price-card">
+          <h3>💻 Clinică (online)</h3>
+          <div class="price-line">
+            <span class="lbl">Ședință de evaluare clinică, online</span>
+            <span class="val">100 lei</span>
+          </div>
+          <p class="price-note">Evaluare orientată spre clarificarea provocării cu care te confrunți și direcția potrivită de intervenție.</p>
+        </div>
+        <div class="price-card">
+          <h3>🗣️ Psihoterapie</h3>
+          <div class="price-line">
+            <span class="lbl">Online</span>
+            <span class="val">230 lei</span>
+          </div>
+          <div class="price-line">
+            <span class="lbl">Fizic (București)</span>
+            <span class="val">260 lei</span>
+          </div>
+          <p class="price-note">Ședințe individuale, adaptate nevoilor fiecărui client.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EVENIMENTE ===================== -->
+  <section id="evenimente">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Calendar</span>
+        <h2>Evenimente</h2>
+        <p class="section-sub">Exemplu de structură — evenimente viitoare și trecute.</p>
+      </div>
+
+      <div class="events-block">
+        <div class="table-wrap">
+          <table class="events">
+            <caption>Evenimente viitoare</caption>
+            <thead>
+              <tr><th scope="col">Data</th><th scope="col">Eveniment</th><th scope="col">Acțiune</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>12.09.2026</td>
+                <td>Workshop — Înțelegerea OCD: obsesii, compulsii și ciclul anxietății</td>
+                <td><a class="reg" href="#contact">Înscrie-te</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="events-block">
+        <div class="table-wrap">
+          <table class="events">
+            <caption>Evenimente trecute</caption>
+            <thead>
+              <tr><th scope="col">Data</th><th scope="col">Eveniment</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>15.06.2026</td>
+                <td>Sesiune introductivă — Ce este OCD și cum se deosebește de anxietatea obișnuită</td>
+                <td><span class="status-done">✓ Încheiat</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Ia legătura</span>
+        <h2>Contact 🌀</h2>
+        <p class="section-sub">Alege serviciul potrivit și scrie-ne direct pe WhatsApp.</p>
+      </div>
+      <div class="contact-grid">
+        <a class="contact-btn" href="https://wa.me/40768914477" target="_blank" rel="noopener noreferrer">
+          <span class="wa-ico" aria-hidden="true">💻</span>
+          <span class="c-label">Evaluare</span>
+          <span class="c-title">Clinică — WhatsApp</span>
+          <span class="c-num">+40 768 914 477</span>
+        </a>
+        <a class="contact-btn" href="https://wa.me/40749255366" target="_blank" rel="noopener noreferrer">
+          <span class="wa-ico" aria-hidden="true">🗣️</span>
+          <span class="c-label">Ședințe</span>
+          <span class="c-title">Psihoterapie — WhatsApp</span>
+          <span class="c-num">+40 749 255 366</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand-line">PsihOCD</div>
+        <p>Psihoeducație și sprijin psihologic pentru persoane care se confruntă cu tulburarea obsesiv-compulsivă.</p>
+      </div>
+      <nav class="foot-links" aria-label="Navigare subsol">
+        <a href="#acasa">Acasă</a>
+        <a href="#resurse">Resurse</a>
+        <a href="#despre">Despre noi</a>
+        <a href="#articole">Articole</a>
+        <a href="#studii">Studii</a>
+        <a href="#tarife">Tarife</a>
+        <a href="#evenimente">Evenimente</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="foot-bottom wrap" style="padding-left:0; padding-right:0;">
+      <span>🌀 © 2026 PsihOCD. Toate drepturile rezervate.</span>
+      <span>Informațiile de pe acest site au scop psihoeducațional și nu înlocuiesc evaluarea sau tratamentul de specialitate.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('primaryNav');
+    toggle.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // mobile: tap "Resurse" opens submenu instead of following link when nav is in mobile mode
+    var resDropdown = document.getElementById('resDropdown');
+    var resToggle = document.getElementById('resToggle');
+    resToggle.addEventListener('click', function(e){
+      if (window.getComputedStyle(toggle).display !== 'none') {
+        e.preventDefault();
+        resDropdown.classList.toggle('open');
+      }
+    });
+
+    // close mobile nav after clicking a link
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        if (window.getComputedStyle(toggle).display !== 'none' && a.getAttribute('href') !== '#resurse') {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
